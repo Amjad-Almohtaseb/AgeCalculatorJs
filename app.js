@@ -14,16 +14,45 @@
 // This functions should check the integrity of the parameters and pass true/false
 function checkParamsFn(year, month, day) {
   // Write your code here
+  let x=Number.isInteger(year);
+  let y=Number.isInteger(month);
+  let z=Number.isInteger(day);
+  if (x&&y&&z)return true
+  return false
 }
 
 // This functions checks if the person is or above 18 years of age, return true/false
-function checkOverEighteenFn(year, month, day) {
-  // Write your code here
-}
+
+  
+  function checkOverEighteenFn(year, month, day) {
+    // Write your code here
+    let today = new Date();
+    let x=today.getFullYear()-18;
+    if (year<x) return true ;
+    if (year>x) return false ;
+    // year==x
+    if (month>(today.getMonth()+1)) return false;
+    else if(month<(today.getMonth()+1))return true ;
+    else if(month>(today.getMonth()+1))return false ;
+    else if(day<(today.getDate()+1))return true;
+    else return false ;
+    }
+
+
+
 
 function calculateAgeFn(year, month, day) {
   // Write your code here
+  var today = new Date();
+  if ((!checkParamsFn(year, month, day)))return('error:one of the parameters at least is not integer');
+  if ((!checkOverEighteenFn(year, month, day)))return('error:she/he is less than eighteen');
+  const entiresuminDays=(year*12*30)+(month*30)+(day) ;
+  const currentsuminDays=((today.getFullYear())*12*30)+((today.getMonth()+1)*30)+((today.getDate()+1)) ;
+  return parseInt((currentsuminDays-entiresuminDays)/(12*30));
 }
+      
+
+console.log(calculateAgeFn(2000,5,20));
 
 // Look at the naming of the functions. it looks like salwaBaqer, where
 // the first letter of the first word is small, while the first letter of the
